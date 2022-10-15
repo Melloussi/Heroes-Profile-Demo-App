@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="25dp"
+    android:background="@color/Transparent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/Transparent"
+        app:cardElevation="0dp"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/upperBox">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/rounded_box" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/rounded_box"
+                    android:layout_alignParentBottom="true"/>
+
+                <View
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/circle"
+                    android:visibility="visible" />
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:visibility="invisible"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    app:cpb_progress="80"
+                    app:cpb_progressbar_color="@color/darkNavy"
+                    app:cpb_progressbar_width="3dp"
+                    android:layout_centerInParent="true"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="68dp">
+                    <ImageView
+                        android:visibility="visible"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:id="@+id/image"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/avatar" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/down"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/upperBox"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_box">
+
+                <TextView
+                    android:id="@+id/tvLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Batman"
+                    android:textColor="@color/white"
+                    android:textSize="6pt"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
