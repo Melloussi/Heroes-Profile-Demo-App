@@ -43,6 +43,8 @@ class HeroesViewModel() : ViewModel() {
         }
     }
 
+    fun getHeroesByName(){}
+
 
 
 }

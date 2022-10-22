@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppSearchView">
+        <!-- Text Size -->
+<!--        <item name="android:textSize">@dimen/textSizePrimary</item>-->
+        <!-- Query Text Color -->
+        <item name="android:textColorPrimary">@color/darkNavy</item>
+        <!-- Hint Color -->
+        <item name="android:textColorHint">@color/skyBlue</item>
+        <!-- Icon Color -->
+        <item name="android:tint">@color/darkNavy</item>
+    </style>
+</resources>

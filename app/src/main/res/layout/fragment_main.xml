@@ -2,11 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/skyBlue">
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search on Hero..."
+        android:background="@drawable/shearch_view_style"
+        app:searchIcon="@drawable/search_24"
+        app:theme="@style/AppSearchView"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"
+        android:layout_below="@id/searchView"
         android:layout_above="@id/progress"/>
     <ProgressBar
         android:visibility="gone"
