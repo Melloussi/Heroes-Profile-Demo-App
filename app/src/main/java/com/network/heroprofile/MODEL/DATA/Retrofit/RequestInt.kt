@@ -9,4 +9,7 @@ interface RequestInt {
     @GET("/heros")
     //@Headers({"pagination":""})
     suspend fun getHeroes(@Header ("pagination") pageNum:Int):Response<MutableList<HeroProfile>>
+
+    @GET("/heros/search")
+    suspend fun getHeroesByName(@HeaderMap headers: Map<String, String>):Response<MutableList<HeroProfile>>
 }

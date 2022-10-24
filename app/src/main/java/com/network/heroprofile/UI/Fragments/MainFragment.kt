@@ -50,8 +50,8 @@ class MainFragment : Fragment() {
         println("is Online?: $conn")
 
 
-        if(!conn){
-        heroesVM.getHeroes(0)
+        if(conn){
+        heroesVM.getHeroes()
         heroesVM.getAll.observe(viewLifecycleOwner, Observer { list ->
             var adapter: HerosAdapter? = null
             val state = heroesVM.state
@@ -84,7 +84,7 @@ class MainFragment : Fragment() {
                                 heroesVM.state = recyclerView.layoutManager!!.onSaveInstanceState()
                                 val page = heroesVM.getPage()
                                 println("------ Page[$page] _List[$totalItemCount] totalItemCount[$totalItemCount] lastVisible[$lastVisible]")
-                                heroesVM.getHeroes(page)
+                                heroesVM.getHeroes()
                                 loadNewData = true
                             }else if((lastVisible+1)*2 < totalItemCount && loadNewData){
                                 //println("------> Not Reached the Bottom Yet")
@@ -95,6 +95,8 @@ class MainFragment : Fragment() {
                         }
                     }
                 })
+
+                adapter.notifyDataSetChanged()
             }
         })
         }else{
@@ -116,8 +118,12 @@ class MainFragment : Fragment() {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                println("---> text Change: $newText")
+            override fun onQueryTextChange(keyword: String?): Boolean {
+                println("---> text Change: $keyword")
+                if (keyword != null && keyword.length > 3){
+                    println("-----> I Executed")
+                    heroesVM.getHeroesByName(keyword)
+                }
                 return false
             }
         })

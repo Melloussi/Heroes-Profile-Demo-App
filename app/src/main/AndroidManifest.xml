@@ -16,6 +16,9 @@
         android:theme="@style/Theme.HeroProfile"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+<!--        <meta-data-->
+<!--            android:name = "keyValue"-->
+<!--            android:value = "${KEY}"/>-->
         <activity
             android:name=".UI.Activities.MainActivity"
             android:exported="true">
