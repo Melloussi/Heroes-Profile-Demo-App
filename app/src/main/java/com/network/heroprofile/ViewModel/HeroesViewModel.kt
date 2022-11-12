@@ -17,10 +17,15 @@ class HeroesViewModel() : ViewModel() {
     val getAll = allHeroes
     private val _defaultDataKeeper = ArrayList<HeroProfile>()
     private val _searchDataKeeper = ArrayList<HeroProfile>()
-    private var pageNum:Int = 0
+    private var mainPageNum:Int = 0
+    private var searchPageNum:Int = 0
     private var _state: Parcelable? = null
     private var _reachEnd = false
     private var _keyword = ""
+    private var _isSearchResultActive = false
+    val isSearchResultActive get() = _isSearchResultActive
+
+
 
 //    private val ai: ApplicationInfo = application.packageManager
 //        .getApplicationInfo(application.packageName, PackageManager.GET_META_DATA)
@@ -31,9 +36,16 @@ class HeroesViewModel() : ViewModel() {
 
 
 
-    fun getPage():Int{
-        pageNum++
-        return pageNum
+//    fun getPage():Int{
+//        pageNum++
+//        return pageNum
+//    }
+
+    fun inCreaseMainPage(){
+        mainPageNum++
+    }
+    fun inCreaseSearchPage(){
+        searchPageNum++
     }
 
     val reachEnd get() = _reachEnd
@@ -45,10 +57,11 @@ class HeroesViewModel() : ViewModel() {
 
     fun getHeroes(){
         viewModelScope.launch {
-            val result = repo.getHeroes(pageNum)
+            val result = repo.getHeroes(mainPageNum)
             if(result != null && result.isNotEmpty()){
                 _defaultDataKeeper.addAll(result)
                 getAll.value = _defaultDataKeeper
+                _isSearchResultActive = false
             }else{
                 _reachEnd = true
             }
@@ -58,15 +71,16 @@ class HeroesViewModel() : ViewModel() {
     fun getHeroesByName(keyword:String){
         viewModelScope.launch {
             println("--------> Hi From ViewModel")
-            val result = repo.getHeroesByName(key, keyword, pageNum)
+            val result = repo.getHeroesByName(key, keyword, searchPageNum)
 
             if(result != null && result.isNotEmpty()){
                 if(_keyword !== keyword){
                     _searchDataKeeper.clear()
-                    pageNum = 0
+                    searchPageNum = 0
                 }
                 _searchDataKeeper.addAll(result)
                 getAll.value = _searchDataKeeper
+                _isSearchResultActive = true
                 println("------> Search List: $_searchDataKeeper")
             }else{
                 _reachEnd = true

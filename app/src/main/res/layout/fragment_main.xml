@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/skyBlue">
+    android:background="@color/light_red">
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -13,7 +13,8 @@
         app:queryHint="Search on Hero..."
         android:background="@drawable/shearch_view_style"
         app:searchIcon="@drawable/search_24"
-        app:theme="@style/AppSearchView"/>
+        app:theme="@style/AppSearchView"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,13 +28,13 @@
         android:id="@+id/progress"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:indeterminateTint="@color/darkNavy"/>
+        android:indeterminateTint="@color/main_red"/>
     <ProgressBar
         android:visibility="visible"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/CenterProgress"
         android:layout_centerInParent="true"
-        android:indeterminateTint="@color/darkNavy"/>
+        android:indeterminateTint="@color/main_red"/>
 
 </RelativeLayout>

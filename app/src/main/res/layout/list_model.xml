@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
     android:layout_margin="25dp"
     android:background="@color/Transparent">
     <androidx.cardview.widget.CardView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/Transparent"
@@ -41,7 +42,7 @@
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     app:cpb_progress="80"
-                    app:cpb_progressbar_color="@color/darkNavy"
+                    app:cpb_progressbar_color="@color/main_red"
                     app:cpb_progressbar_width="3dp"
                     android:layout_centerInParent="true"/>
                 <androidx.cardview.widget.CardView
@@ -71,7 +72,13 @@
                     android:id="@+id/tvLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+
                     android:layout_centerInParent="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="Batman"
                     android:textColor="@color/white"
                     android:textSize="6pt"
@@ -79,4 +86,9 @@
             </RelativeLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/face"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.network.heroprofile.MODEL.DATA.DataClases.Hero
 import com.network.heroprofile.MODEL.DATA.DataClases.HeroProfile
 import com.network.heroprofile.R
+import com.network.heroprofile.UI.Depandency.ColorPalette
 import com.squareup.picasso.Picasso
 
-class HerosAdapter(private val context: Context, private val list: MutableList<HeroProfile>) :  RecyclerView.Adapter<HerosAdapter.MyViewHolder>(){
+class HerosAdapter(private val context: Context, private val list: MutableList<HeroProfile>, val itemClicked: (item:HeroProfile) -> Unit) :  RecyclerView.Adapter<HerosAdapter.MyViewHolder>(){
 
 //    init {
 //        val localList : MutableList<HeroProfile>
@@ -22,6 +23,7 @@ class HerosAdapter(private val context: Context, private val list: MutableList<H
     inner class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
          val leftImage: ImageView = view.findViewById<ImageView>(R.id.image)
         val text: TextView = view.findViewById<TextView>(R.id.tvLeft)
+        val face: View = view.findViewById<View>(R.id.face)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,6 +34,12 @@ class HerosAdapter(private val context: Context, private val list: MutableList<H
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         Picasso.get().load(list[position].images.sm).into(holder.leftImage)
         holder.text.text = list[position].name
+
+        holder.face.setOnClickListener(View.OnClickListener {
+            itemClicked(list[position])
+        })
+
+
     }
 
     override fun getItemCount(): Int {

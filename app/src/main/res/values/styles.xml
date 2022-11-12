@@ -5,10 +5,10 @@
         <!-- Text Size -->
 <!--        <item name="android:textSize">@dimen/textSizePrimary</item>-->
         <!-- Query Text Color -->
-        <item name="android:textColorPrimary">@color/darkNavy</item>
+        <item name="android:textColorPrimary">@color/main_red</item>
         <!-- Hint Color -->
-        <item name="android:textColorHint">@color/skyBlue</item>
+        <item name="android:textColorHint">@color/light_red</item>
         <!-- Icon Color -->
-        <item name="android:tint">@color/darkNavy</item>
+        <item name="android:tint">@color/main_red</item>
     </style>
 </resources>

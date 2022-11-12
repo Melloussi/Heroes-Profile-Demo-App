@@ -7,14 +7,24 @@
     <color name="teal_700">#BB000B</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent_white">#4DFFFFFF</color>
     <color name="Transparent">#00FFFFFF</color>
 
 
     <color name="darkBlue">#25316D</color>
     <color name="grayBlue">#5F6F94</color>
-    <color name="skyBlue">#dd7f85</color>
+    <color name="light_red">#dd7f85</color>
 
-    <color name="darkNavy">#BB000B</color>
+    <color name="main_red">#BB000B</color>
     <color name="navy">#A084CA</color>
     <color name="grayNavy">#A084CA</color>
+
+    <!--  Progress Colors  -->
+    <color name="intelligence_color">#A8E890</color>
+    <color name="strength_color">#4FA095</color>
+    <color name="speed_color">#F0E161</color>
+    <color name="durability_color">#5F9DF7</color>
+    <color name="power_color">#7DCE13</color>
+    <color name="combat_color">#554994</color>
+
 </resources>

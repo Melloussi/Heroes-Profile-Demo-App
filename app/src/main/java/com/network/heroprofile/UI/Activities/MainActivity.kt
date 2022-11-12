@@ -10,6 +10,7 @@ import com.network.heroprofile.UI.Adapter.HerosAdapter
 import com.network.heroprofile.MODEL.DATA.DataClases.Hero
 import com.network.heroprofile.R
 import com.network.heroprofile.UI.Fragments.MainFragment
+import com.network.heroprofile.UI.Fragments.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
