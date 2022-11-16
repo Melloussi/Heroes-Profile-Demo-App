@@ -4,7 +4,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![Percentage of issues still open](http://isitmaintained.com/badge/open/Naereen/badges.svg)](http://isitmaintained.com/project/Naereen/badges "Percentage of issues still open") [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/Naereen/badges) [![PyPi license](https://badgen.net/pypi/license/pip/)](https://pypi.com/project/pip/)
 
 I made this app project ( Hero Profile ) as an open source project, Feel Free to download it and add your touch on it.
-Go to the Releases to download the latest APK.
+Go to the <a href="https://github.com/Melloussi/Heroes-Profile-Demo-App/releases/tag/kotlin">Releases</a> to download the latest APK.
 
 # 📱 GIF
 <p align="center"><img src="https://s4.gifyu.com/images/MyGif.gif" width="360"/> </p>
