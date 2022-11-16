@@ -21,8 +21,10 @@ class MainActivity : AppCompatActivity() {
     val viewModel: HeroesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar?.hide()
+
         super.onCreate(savedInstanceState)
+        setTheme(R.style.splashScreenTheme)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
 //        heroesVM = ViewModelProvider(requireActivity())[HeroesViewModel::class.java]
