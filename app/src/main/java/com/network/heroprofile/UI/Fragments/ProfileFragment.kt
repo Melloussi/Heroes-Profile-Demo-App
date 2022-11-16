@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.network.heroprofile.MODEL.DATA.DataClases.HeroProfile
+import com.network.heroprofile.MODEL.DATA.DataClases.Screen
 import com.network.heroprofile.R
 import com.network.heroprofile.UI.Activities.MainActivity
-import com.network.heroprofile.UI.Depandency.ColorPalette
+import com.network.heroprofile.ViewModel.HeroesViewModel
 import com.network.heroprofile.ViewModel.ProfileViewModel
 import com.squareup.picasso.Picasso
 
@@ -40,6 +38,12 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         val heroProfileVM = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+        val heroesVM = ViewModelProvider(requireActivity())[HeroesViewModel::class.java]
+
+        val profile_Screen = heroesVM.PROFILE_SCREEN
+        val previous_Screen = heroesVM.ScreenState.current
+        //set New State
+        heroesVM.ScreenState = Screen(previous_Screen, profile_Screen)
 
         val heroName: TextView = view.findViewById(R.id.heroName)
         val profileImage: ImageView = view.findViewById(R.id.profileImage)
@@ -56,11 +60,13 @@ class ProfileFragment : Fragment() {
         val data = heroProfileVM.profileData
 
 
+        //data.biography.fullName
         heroName.text = data.name
-        Picasso.get().load(data.images.lg).into(profileImage)
+        Picasso.get().load(data.images.sm).into(profileImage)
         progressState(data)
 
         back.setOnClickListener(View.OnClickListener {
+//            heroProfileVM.isBackFromProfile = true
             (activity as MainActivity?)?.fragmentSwitcher(MainFragment())
         })
 
@@ -71,26 +77,32 @@ class ProfileFragment : Fragment() {
     private fun progressState(data: HeroProfile) {
         intelligence_progress.apply {
             setProgressWithAnimation(data.powerstats.intelligence.toFloat(), 3000)
+            roundBorder = true
             progressMax = 100f
         }
         strength_progress.apply {
             setProgressWithAnimation(data.powerstats.strength.toFloat(), 3000)
+            roundBorder = true
             progressMax = 100f
         }
         speed_progress.apply {
             setProgressWithAnimation(data.powerstats.speed.toFloat(), 3000)
+            roundBorder = true
             progressMax = 100f
         }
         durability_progress.apply {
             setProgressWithAnimation(data.powerstats.durability.toFloat(), 3000)
+            roundBorder = true
             progressMax = 100f
         }
         power_progress.apply {
             setProgressWithAnimation(data.powerstats.power.toFloat(), 3000)
+            roundBorder = true
             progressMax = 100f
         }
         combat_progress.apply {
             setProgressWithAnimation(data.powerstats.combat.toFloat(), 3000)
+            roundBorder = true
             progressMax = 100f
         }
     }

@@ -8,6 +8,7 @@ import com.network.heroprofile.MODEL.DATA.DataClases.HeroProfile
 class ProfileViewModel: ViewModel() {
 
     private lateinit var _getProfileData:HeroProfile
+    var isBackFromProfile = false
 
     var profileData
     get() = _getProfileData

@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,7 +26,8 @@ import com.network.heroprofile.ViewModel.ProfileViewModel
 
 class MainFragment : Fragment() {
 
-    private val heroesVM: HeroesViewModel by viewModels()
+//    private val heroesVM: HeroesViewModel by viewModels()
+    private lateinit var heroesVM: HeroesViewModel
 //    private val heroProfileVM: ProfileViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -43,6 +43,8 @@ class MainFragment : Fragment() {
         val CenterProgress = view.findViewById<ProgressBar>(R.id.CenterProgress)
 
         val heroProfileVM = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+        heroesVM = ViewModelProvider(requireActivity())[HeroesViewModel::class.java]
+
 
         val conn = ConnectionValidation().isOnline(context)
 
@@ -53,10 +55,13 @@ class MainFragment : Fragment() {
 
 
         if (conn) {
-            if(heroesVM.getAll.value?.size == 0){
 
+            if(!heroProfileVM.isBackFromProfile){
+                heroesVM.getHeroes()
+            }else{
+                heroesVM.triggerHeroes()
             }
-            heroesVM.getHeroes()
+
             heroesVM.getAll.observe(viewLifecycleOwner, Observer { list ->
                 var adapter: HerosAdapter? = null
                 val state = heroesVM.state
@@ -65,11 +70,10 @@ class MainFragment : Fragment() {
                     CenterProgress.visibility = View.GONE
                     progress.visibility = View.GONE
                     adapter = HerosAdapter(context, list)
-                    {
-                            profileDate ->
-//                        heroProfileVM.profileDate(profileDate)
-
+                    { profileDate ->
                         heroProfileVM.profileData = profileDate
+                        heroProfileVM.isBackFromProfile = true
+                        heroesVM.state = recyclerView.layoutManager!!.onSaveInstanceState()
                         (activity as MainActivity?)?.fragmentSwitcher(ProfileFragment())
                     }
 
@@ -119,8 +123,11 @@ class MainFragment : Fragment() {
                     })
 
                     adapter.notifyDataSetChanged()
+                }else{
+                    Toast.makeText(requireContext(),"There's No Data To Show", Toast.LENGTH_LONG).show()
                 }
             })
+
         } else {
             //Snackbar.make(view, "text", Snackbar.LENGTH_LONG).setAction("Action", null /* replace with your action or leave null to just display text*/).show();
             //Snackbar.make(rootView, "No Internt Connection", Snackbar.LENGTH_SHORT).show()
@@ -145,9 +152,11 @@ class MainFragment : Fragment() {
                 if (keyword != null && keyword.length > 2) {
                     println("-----> I Executed")
                     heroesVM.getHeroesByName(keyword)
-                }else if(keyword != null && keyword.isEmpty()){
+                    heroesVM.isSearchResultActive = true
+                } else if (keyword != null && keyword.isEmpty()) {
                     heroesVM.inCreaseMainPage()
                     heroesVM.getHeroes()
+                    heroesVM.isSearchResultActive = false
                 }
                 return false
             }

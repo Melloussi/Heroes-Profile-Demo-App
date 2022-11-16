@@ -1,12 +1,10 @@
 package com.network.heroprofile.ViewModel
 
-import android.app.Application
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.os.Parcelable
 import androidx.lifecycle.*
 import com.network.heroprofile.BuildConfig
 import com.network.heroprofile.MODEL.DATA.DataClases.HeroProfile
+import com.network.heroprofile.MODEL.DATA.DataClases.Screen
 import com.network.heroprofile.MODEL.Repository.HeroesRepo
 import kotlinx.coroutines.launch
 
@@ -23,14 +21,28 @@ class HeroesViewModel() : ViewModel() {
     private var _reachEnd = false
     private var _keyword = ""
     private var _isSearchResultActive = false
-    val isSearchResultActive get() = _isSearchResultActive
+    var isSearchResultActive
+    get() = _isSearchResultActive
+    set(value) {_isSearchResultActive = value}
 
 
 
-//    private val ai: ApplicationInfo = application.packageManager
-//        .getApplicationInfo(application.packageName, PackageManager.GET_META_DATA)
-//    private val value = ai.metaData["keyValue"]
-//    private val key = value.toString()
+
+//    private var _prvious_screen = 0
+//    var PREVIOUS_SCREEN
+//    get() = _prvious_screen
+//    set(value) {_prvious_screen = value}
+
+    val MAIN_SCREEN = 0
+    val SEARCH_SCREEN = 1
+    val PROFILE_SCREEN = 2
+
+    private var _screen_state = Screen(MAIN_SCREEN, MAIN_SCREEN)
+    var ScreenState
+    get() = _screen_state
+    set(value) {_screen_state = value}
+
+
 
     private val key = BuildConfig.KEY
 
@@ -40,6 +52,17 @@ class HeroesViewModel() : ViewModel() {
 //        pageNum++
 //        return pageNum
 //    }
+
+    fun triggerHeroes(){
+
+        if(_isSearchResultActive){
+            _screen_state = Screen(MAIN_SCREEN, SEARCH_SCREEN)
+            getAll.value = _searchDataKeeper
+        }else{
+            getAll.value = _defaultDataKeeper
+            _screen_state = Screen(MAIN_SCREEN, MAIN_SCREEN)
+        }
+    }
 
     fun inCreaseMainPage(){
         mainPageNum++
@@ -62,6 +85,8 @@ class HeroesViewModel() : ViewModel() {
                 _defaultDataKeeper.addAll(result)
                 getAll.value = _defaultDataKeeper
                 _isSearchResultActive = false
+//                _prvious_screen = MAIN_SCREEN
+                _screen_state = Screen(MAIN_SCREEN, MAIN_SCREEN)
             }else{
                 _reachEnd = true
             }
@@ -81,6 +106,8 @@ class HeroesViewModel() : ViewModel() {
                 _searchDataKeeper.addAll(result)
                 getAll.value = _searchDataKeeper
                 _isSearchResultActive = true
+//                _prvious_screen = SEARCH_SCREEN
+                _screen_state = Screen(MAIN_SCREEN, SEARCH_SCREEN)
                 println("------> Search List: $_searchDataKeeper")
             }else{
                 _reachEnd = true
