@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://gold-fragile-coypu.cyclic.app")
+            .baseUrl("https://herocharacter.onrender.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

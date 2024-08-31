@@ -1,23 +1,19 @@
 package com.network.heroprofile.UI.Activities
 
 import android.os.Bundle
-import android.view.Window
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.network.heroprofile.UI.Adapter.HerosAdapter
-import com.network.heroprofile.MODEL.DATA.DataClases.Hero
 import com.network.heroprofile.R
 import com.network.heroprofile.UI.Fragments.MainFragment
-import com.network.heroprofile.UI.Fragments.ProfileFragment
 import com.network.heroprofile.ViewModel.HeroesViewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private var doubleBackToExitPressedOnce = false
     val viewModel: HeroesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-//        super.onBackPressed()
+
         val screen_state = viewModel.ScreenState
         println("-------> Previous Screen: ${screen_state.previous} Current Screen: ${screen_state.current}")
 
@@ -57,8 +53,20 @@ class MainActivity : AppCompatActivity() {
                 viewModel.triggerHeroes()
             }
             viewModel.MAIN_SCREEN -> {
-                //Press Back Twice to Exit
-                Toast.makeText(this, "Press Back Twice to Exit", Toast.LENGTH_SHORT).show()
+                if (doubleBackToExitPressedOnce) {
+                    super.onBackPressed()
+                    return
+                }
+
+                this.doubleBackToExitPressedOnce = true
+                Toast.makeText(this, "Press Back Again to Exit", Toast.LENGTH_SHORT).show()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    doubleBackToExitPressedOnce = false
+                }, 2000)
+            }
+            else -> {
+                super.onBackPressed()
             }
         }
     }
